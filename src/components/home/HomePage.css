@@ -1,0 +1,6 @@
+.home-page {
+  padding-bottom: var(--spacing-xl);
+}
+html {
+  scroll-behavior: smooth;
+}
