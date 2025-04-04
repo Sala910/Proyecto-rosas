@@ -12,8 +12,8 @@ const features = [
         <line x1="26.5" y1="30" x2="26.5" y2="36" stroke="#903d3c" strokeWidth="1.5"/>
       </svg>
     ),
-    title: 'Бережная доставка',
-    description: 'в транспортировочной коробке'
+    title: 'Оптимальная доставка',
+    description: 'по всей Москве'
   },
   {
     id: 2,
