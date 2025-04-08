@@ -25,28 +25,28 @@ const featuredProducts: ProductData[] = [
     id: 1,
     title: 'Букет с гортензией и розами',
     image: product1,
-    price: 17000,
-    bonusText: '15-25%',
+    price: 200,
+    bonusText: 'за 1 шт',
     url: '/catalog/bukety/46363/',
-    oldPrice: 20000,
-    discount: 3000,
+    oldPrice: 250,
+    discount: 20,
   },
   {
     id: 2,
     title: 'Нежность пионовидных роз',
     image: product2,
-    price: 9500,
-    bonusText: '5-15%',
+    price: 200,
+    bonusText: 'за 1 шт',
     url: '/catalog/bukety/46343/',
-    oldPrice: 12000,
-    discount: undefined,
+    oldPrice: 250,
+    discount: 20,
   },
   {
     id: 3,
     title: 'Премиум букет красных роз',
     image: product3,
     price: 40100,
-    bonusText: '5-15%',
+    bonusText: 'за 1 шт',
     url: '/catalog/bukety/46376/',
     oldPrice: undefined,
     discount: undefined,
@@ -120,7 +120,7 @@ const FeaturedProducts: React.FC = () => {
   return (
     <section className="featured-section">
       <div className="container">
-        <h2 className="section-title">БУКЕТЫ НЕДЕЛИ</h2>
+        <h2 className="section-title">РОЗЫ</h2>
         <div className="featured-grid">
           {featuredProducts.map((product) => (
             <ProductCard
@@ -139,7 +139,7 @@ const FeaturedProducts: React.FC = () => {
 
         <div className="view-all-container">
           <Link to="/catalog/bukety-nedeli/" className="view-all-link">
-            Смотреть все букеты недели
+            Смотреть все букеты 
           </Link>
         </div>
 
