@@ -1,37 +1,24 @@
 import React, { useState } from 'react';
-import './LoginMenu.css'; // Asegúrate de tener este archivo con los estilos que desees
+import './LoginMenu.css';
 
-const LoginMenu: React.FC = () => {
-  // Estado para cambiar entre modos: false = Вход, true = Регистрация
+interface LoginMenuProps {
+  onLoginSuccess: () => void;
+}
+
+const LoginMenu: React.FC<LoginMenuProps> = ({ onLoginSuccess }) => {
   const [isRegisterMode, setIsRegisterMode] = useState(false);
-
-  /* ------------------ MODO Вход (Авторизация) ------------------ */
-  // Selección del método: 'phone' o 'email'
   const [loginMethod, setLoginMethod] = useState<'phone' | 'email'>('phone');
-
-  // Estados para login por teléfono
   const [phone, setPhone] = useState('');
   const [codeSent, setCodeSent] = useState(false);
   const [smsCode, setSmsCode] = useState('');
-
-  // Estados para login por e-mail
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  /* ------------------ MODO Регистрация ------------------ */
-  // Selección del método de registro: 'phone' o 'email'
   const [registrationMethod, setRegistrationMethod] = useState<'phone' | 'email'>('phone');
-
-  // Estados para registro por teléfono
   const [registrationPhone, setRegistrationPhone] = useState('');
   const [registrationCodeSent, setRegistrationCodeSent] = useState(false);
   const [registrationSmsCode, setRegistrationSmsCode] = useState('');
-
-  // Estados para registro por e-mail
   const [regEmail, setRegEmail] = useState('');
   const [regPassword, setRegPassword] = useState('');
-
-  /* ------------------ Estado de Error ------------------ */
   const [error, setError] = useState<string | null>(null);
 
   /* ------------------ Funciones de Вход ------------------ */
@@ -51,6 +38,7 @@ const LoginMenu: React.FC = () => {
     }
     setError(null);
     console.log('Логин по телефону успешен');
+    onLoginSuccess(); // Llamada al callback de éxito
   };
 
   const handleEmailLogin = () => {
@@ -60,6 +48,7 @@ const LoginMenu: React.FC = () => {
     }
     setError(null);
     console.log('Логин по E-mail успешен');
+    onLoginSuccess(); // Llamada al callback de éxito
   };
 
   /* ------------------ Funciones de Регистрация ------------------ */
@@ -79,6 +68,9 @@ const LoginMenu: React.FC = () => {
     }
     setError(null);
     console.log('Регистрация по телефону успешна');
+    setIsRegisterMode(false); // Cambia al modo de login después del registro
+    setLoginMethod('phone'); // Establece el método de login por teléfono
+    setPhone(registrationPhone); // Autocompleta el teléfono para login
   };
 
   const handleRegisterEmail = () => {
@@ -88,12 +80,15 @@ const LoginMenu: React.FC = () => {
     }
     setError(null);
     console.log('Регистрация по E-mail успешна');
+    setIsRegisterMode(false); // Cambia al modo de login después del registro
+    setLoginMethod('email'); // Establece el método de login por email
+    setEmail(regEmail); // Autocompleta el email para login
   };
 
   return (
     <div className="login-menu">
       <div className="login-menu-content">
-        { !isRegisterMode ? (
+        {!isRegisterMode ? (
           /* ================= MODO Вход (Авторизация) ================= */
           <>
             <h2>Вход</h2>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Header.css'; 
+import './Header.css';
 import logo from '../../assets/images/logo.webp';
-import LoginMenu from '../auth/LoginMenu'; // Ajusta la ruta según tu estructura
+import LoginMenu from '../auth/LoginMenu';
 
 const handleCatalogClick = (event: React.MouseEvent) => {
   event.preventDefault();
@@ -13,16 +13,10 @@ const handleCatalogClick = (event: React.MouseEvent) => {
 };
 
 const Header: React.FC = () => {
-  // Estado de autenticación
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // Control del modal de login (para usuarios no autenticados)
   const [showLoginModal, setShowLoginModal] = useState(false);
-  // Control del menú de usuario (para usuarios autenticados)
   const [showUserMenu, setShowUserMenu] = useState(false);
 
-  // Al hacer clic en el ícono de cuenta:
-  // Si el usuario NO está autenticado, se muestra/oculta el modal de login.
-  // Si ya está autenticado, se muestra/oculta el menú de usuario.
   const handleAccountClick = () => {
     if (!isLoggedIn) {
       setShowLoginModal(!showLoginModal);
@@ -33,14 +27,12 @@ const Header: React.FC = () => {
     }
   };
 
-  // Simulación de éxito de login (puedes implementar la lógica en LoginMenu)
-  //const handleLoginSuccess = () => {
-    //setIsLoggedIn(true);
-    //setShowLoginModal(false);
-    //setShowUserMenu(false);
-  //};
-//
-  // Cerrar sesión
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+    setShowLoginModal(false);
+    setShowUserMenu(false);
+  };
+
   const handleLogout = () => {
     setIsLoggedIn(false);
     setShowUserMenu(false);
@@ -69,7 +61,6 @@ const Header: React.FC = () => {
           </nav>
 
           <div className="header-actions">
-            {/* Ícono de cuenta: al hacer clic se muestra el modal de login o el menú de usuario */}
             <button onClick={handleAccountClick} className="icon-button account-icon" title="Личный кабинет">
               <svg viewBox="0 0 24 24" width="24" height="24">
                 <path d="M12,12c2.2,0,4-1.8,4-4s-1.8-4-4-4S8,5.8,8,8S9.8,12,12,12z M12,14c-2.7,0-8,1.3-8,4v2h16v-2
@@ -94,15 +85,13 @@ const Header: React.FC = () => {
           </div>
         </div>
 
-        {/* Modal de login (para usuarios no autenticados) */}
         {showLoginModal && !isLoggedIn && (
           <div className="login-modal">
             <button className="close-button" onClick={handleAccountClick}>×</button>
-            <LoginMenu />
+            <LoginMenu onLoginSuccess={handleLoginSuccess} />
           </div>
         )}
 
-        {/* Menú de usuario (para usuarios autenticados) */}
         {showUserMenu && isLoggedIn && (
           <div className="user-menu">
             <button className="user-menu-item">Настройки</button>

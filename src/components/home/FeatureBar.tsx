@@ -27,8 +27,8 @@ const features = [
         <path d="M35 23H38L40 27H35V23Z" stroke="#903d3c" strokeWidth="1.5"/>
       </svg>
     ),
-    title: 'Доставим за 2',
-    description: 'часа'
+    title: 'Доставим',
+    description: 'за 2 часа'
   },
   {
     id: 3,
