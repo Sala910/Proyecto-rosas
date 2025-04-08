@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css'; 
 import logo from '../../assets/images/logo.webp';
-
+import LoginMenu from '../auth/LoginMenu'; // Ajusta la ruta según tu estructura
 
 const handleCatalogClick = (event: React.MouseEvent) => {
   event.preventDefault();
@@ -13,12 +13,45 @@ const handleCatalogClick = (event: React.MouseEvent) => {
 };
 
 const Header: React.FC = () => {
+  // Estado de autenticación
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // Control del modal de login (para usuarios no autenticados)
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  // Control del menú de usuario (para usuarios autenticados)
+  const [showUserMenu, setShowUserMenu] = useState(false);
+
+  // Al hacer clic en el ícono de cuenta:
+  // Si el usuario NO está autenticado, se muestra/oculta el modal de login.
+  // Si ya está autenticado, se muestra/oculta el menú de usuario.
+  const handleAccountClick = () => {
+    if (!isLoggedIn) {
+      setShowLoginModal(!showLoginModal);
+      setShowUserMenu(false);
+    } else {
+      setShowUserMenu(!showUserMenu);
+      setShowLoginModal(false);
+    }
+  };
+
+  // Simulación de éxito de login (puedes implementar la lógica en LoginMenu)
+  //const handleLoginSuccess = () => {
+    //setIsLoggedIn(true);
+    //setShowLoginModal(false);
+    //setShowUserMenu(false);
+  //};
+//
+  // Cerrar sesión
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setShowUserMenu(false);
+  };
+
   return (
     <header className="header">
       <div className="container header-container">
         <div className="header-content">
           <Link to="/" className="logo">
-            <img src={logo} alt="Mi Logo" className="logo-image" />
+            <img src={logo} alt="Логотип" className="logo-image" />
           </Link>
 
           <nav className="main-nav">
@@ -30,18 +63,19 @@ const Header: React.FC = () => {
                 <Link to="/delivery/" className="nav-link">ДОСТАВКА</Link>
               </li>
               <li className="nav-item">
-                <Link to="/about/" className="nav-link">О НАС</Link>
+                <Link to="/about/" className="nav-link">O НАС</Link>
               </li>
             </ul>
           </nav>
 
           <div className="header-actions">
-            <Link to="/account/" className="icon-button account-icon" title="Личный кабинет">
+            {/* Ícono de cuenta: al hacer clic se muestra el modal de login o el menú de usuario */}
+            <button onClick={handleAccountClick} className="icon-button account-icon" title="Личный кабинет">
               <svg viewBox="0 0 24 24" width="24" height="24">
                 <path d="M12,12c2.2,0,4-1.8,4-4s-1.8-4-4-4S8,5.8,8,8S9.8,12,12,12z M12,14c-2.7,0-8,1.3-8,4v2h16v-2
                   C20,15.3,14.7,14,12,14z" fill="currentColor"/>
               </svg>
-            </Link>
+            </button>
             <Link to="/favorites/" className="icon-button wishlist-icon" title="Избранное">
               <svg viewBox="0 0 24 24" width="24" height="24">
                 <path d="M12,21.4l-1.6-1.5C5.4,15.4,2,12.3,2,8.5C2,5.4,4.4,3,7.5,3c1.7,0,3.4,0.8,4.5,2.1C13.1,3.8,14.8,3,16.5,3
@@ -59,6 +93,22 @@ const Header: React.FC = () => {
             </Link>
           </div>
         </div>
+
+        {/* Modal de login (para usuarios no autenticados) */}
+        {showLoginModal && !isLoggedIn && (
+          <div className="login-modal">
+            <button className="close-button" onClick={handleAccountClick}>×</button>
+            <LoginMenu />
+          </div>
+        )}
+
+        {/* Menú de usuario (para usuarios autenticados) */}
+        {showUserMenu && isLoggedIn && (
+          <div className="user-menu">
+            <button className="user-menu-item">Настройки</button>
+            <button className="user-menu-item" onClick={handleLogout}>Выйти</button>
+          </div>
+        )}
       </div>
     </header>
   );
