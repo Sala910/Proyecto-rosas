@@ -8,6 +8,10 @@ import product3 from '../../assets/images/product3.webp';
 import product4 from '../../assets/images/product4.webp';
 import product5 from '../../assets/images/product5.webp';
 import product6 from '../../assets/images/product6.webp';
+import product7 from '../../assets/images/product7.webp';
+import product8 from '../../assets/images/product8.webp';
+import product9 from '../../assets/images/product9.webp';
+
 
 interface ProductData {
   id: number;
@@ -23,7 +27,7 @@ interface ProductData {
 const featuredProducts: ProductData[] = [
   {
     id: 1,
-    title: 'Букет с гортензией и розами',
+    title: 'Розы Hot Majolika',
     image: product1,
     price: 200,
     bonusText: 'за 1 шт',
@@ -33,7 +37,7 @@ const featuredProducts: ProductData[] = [
   },
   {
     id: 2,
-    title: 'Нежность пионовидных роз',
+    title: 'Розы White Majolika',
     image: product2,
     price: 200,
     bonusText: 'за 1 шт',
@@ -43,75 +47,75 @@ const featuredProducts: ProductData[] = [
   },
   {
     id: 3,
-    title: 'Премиум букет красных роз',
+    title: 'Розы Red Mikado',
     image: product3,
-    price: 40100,
+    price: 200,
     bonusText: 'за 1 шт',
     url: '/catalog/bukety/46376/',
-    oldPrice: undefined,
-    discount: undefined,
+    oldPrice: 300,
+    discount: 30
   },
   {
     id: 4,
-    title: 'Букет из белых роз и эустомы',
+    title: 'Розы Sun City',
     image: product4,
-    price: 9700,
-    bonusText: '5-15%',
+    price: 200,
+    bonusText: 'за 1 шт',
     url: '/catalog/bukety/46346/',
-    oldPrice: undefined,
-    discount: undefined,
+    oldPrice: 300,
+    discount: 30
   },
   {
     id: 5,
-    title: 'Композиция из красных роз',
+    title: 'Розы Brilliant star Taurus',
     image: product5,
-    price: 21700,
-    bonusText: '5-15%',
+    price: 200,
+    bonusText: 'за 1 шт',
     url: '/catalog/bukety/46362/',
-    oldPrice: undefined,
-    discount: undefined,
+    oldPrice: 250,
+    discount: 20,
   },
   {
     id: 6,
-    title: 'Букет с пионовидными розами',
+    title: 'Розы Sahara Sensation',
     image: product6,
-    price: 12100,
-    bonusText: '5-15%',
+    price: 200,
+    bonusText: 'за 1 шт',
     url: '/catalog/bukety/46360/',
-    oldPrice: undefined,
-    discount: undefined,
+    oldPrice: 250,
+    discount: 20,
   },
 ];
 
 const specialProducts: ProductData[] = [
   {
     id: 7,
-    title: 'Green mango крем для тела 200 мл.',
-    image: 'https://ext.same-assets.com/2511376184/1863606977.webp',
-    price: 750,
-    oldPrice: 1500,
-    discount: 50,
-    bonusText: '5-15%',
+    title: 'Букет 101 красных роз',
+    image: product7,
+    price: 17500,
+    oldPrice: 20000,
+    discount: 15,
+    bonusText: 'С упоковкой!',
     url: '/catalog/podarki/kosmetika_dlya_tela/32496/',
   },
   {
     id: 8,
-    title: 'Amber крем для тела 200 мл.',
-    image: 'https://ext.same-assets.com/2511376184/3920371864.webp',
-    price: 750,
-    oldPrice: 1500,
-    discount: 50,
-    bonusText: '5-15%',
+    title: 'Букет 101 белых роз',
+    image: product8,
+    price: 17500,
+    oldPrice: 20000,
+    discount: 15,
+    bonusText: 'С упоковкой!',
     url: '/catalog/podarki/kosmetika_dlya_tela/32495/',
   },
   {
     id: 9,
-    title: 'Cherry крем для тела 200 мл.',
-    image: 'https://ext.same-assets.com/2511376184/3975393471.webp',
-    price: 750,
-    oldPrice: 1500,
-    discount: 50,
-    bonusText: '5-15%',
+    title: 'Букет 101 сортированных роз',
+    image: product9,
+    price: 17500,
+    oldPrice: 20000,
+    discount: 15,
+    bonusText: 'С упоковкой!',
     url: '/catalog/podarki/kosmetika_dlya_tela/32494/',
   },
 ];
