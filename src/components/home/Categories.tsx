@@ -20,21 +20,11 @@ const categories = [
       { id: 11, name: 'Новая Москва', url: '/delivery/new-moscow/', tooltip: '+450₽' },
     ]
   },
-  {
-    id: 2,
-    title: 'ЦЕНА',
-    items: [
-      { id: 1, name: 'до 5000', url: '/catalog/price-to-5000/', tooltip: 'Precios hasta 5000 ₽' },
-      { id: 2, name: '5000 - 10000', url: '/catalog/price-5000-10000/', tooltip: 'Entre 5000 y 10000 ₽' },
-      { id: 3, name: '10000 - 15000', url: '/catalog/price-10000-15000/', tooltip: 'Entre 10000 y 15000 ₽' },
-      { id: 4, name: 'от 15000', url: '/catalog/price-from-15000/', tooltip: 'Desde 15000 ₽ en adelante' },
-    ]
-  }
 ];
 
 const Categories: React.FC = () => {
   return (
-    <section className="categories-section">
+    <section id="categories-section" className="categories-section">
       <div className="container">
         <div className="categories-container">
           {categories.map((category) => (
@@ -42,7 +32,6 @@ const Categories: React.FC = () => {
               <h3 className="category-title">{category.title}</h3>
               <div className="category-items">
                 {category.items.map((item) => (
-                  // Se utiliza un div con el atributo data-tooltip que toma el valor de item.tooltip
                   <div
                     key={item.id}
                     className="category-item"

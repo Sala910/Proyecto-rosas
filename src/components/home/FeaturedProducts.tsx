@@ -1,3 +1,4 @@
+// src/components/home/FeaturedProducts.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './FeaturedProducts.css';
@@ -11,7 +12,6 @@ import product6 from '../../assets/images/product6.webp';
 import product7 from '../../assets/images/product7.webp';
 import product8 from '../../assets/images/product8.webp';
 import product9 from '../../assets/images/product9.webp';
-
 
 interface ProductData {
   id: number;
@@ -31,7 +31,7 @@ const featuredProducts: ProductData[] = [
     image: product1,
     price: 200,
     bonusText: 'за 1 шт',
-    url: '/catalog/bukety/46363/',
+    url: '',
     oldPrice: 250,
     discount: 20,
   },
@@ -41,7 +41,7 @@ const featuredProducts: ProductData[] = [
     image: product2,
     price: 200,
     bonusText: 'за 1 шт',
-    url: '/catalog/bukety/46343/',
+    url: '',
     oldPrice: 250,
     discount: 20,
   },
@@ -51,9 +51,9 @@ const featuredProducts: ProductData[] = [
     image: product3,
     price: 200,
     bonusText: 'за 1 шт',
-    url: '/catalog/bukety/46376/',
+    url: '',
     oldPrice: 300,
-    discount: 30
+    discount: 30,
   },
   {
     id: 4,
@@ -61,9 +61,9 @@ const featuredProducts: ProductData[] = [
     image: product4,
     price: 200,
     bonusText: 'за 1 шт',
-    url: '/catalog/bukety/46346/',
+    url: '',
     oldPrice: 300,
-    discount: 30
+    discount: 30,
   },
   {
     id: 5,
@@ -71,7 +71,7 @@ const featuredProducts: ProductData[] = [
     image: product5,
     price: 200,
     bonusText: 'за 1 шт',
-    url: '/catalog/bukety/46362/',
+    url: '',
     oldPrice: 250,
     discount: 20,
   },
@@ -81,7 +81,7 @@ const featuredProducts: ProductData[] = [
     image: product6,
     price: 200,
     bonusText: 'за 1 шт',
-    url: '/catalog/bukety/46360/',
+    url: '',
     oldPrice: 250,
     discount: 20,
   },
@@ -96,7 +96,7 @@ const specialProducts: ProductData[] = [
     oldPrice: 20000,
     discount: 15,
     bonusText: 'С упоковкой!',
-    url: '/catalog/podarki/kosmetika_dlya_tela/32496/',
+    url: '',
   },
   {
     id: 8,
@@ -106,7 +106,7 @@ const specialProducts: ProductData[] = [
     oldPrice: 20000,
     discount: 15,
     bonusText: 'С упоковкой!',
-    url: '/catalog/podarki/kosmetika_dlya_tela/32495/',
+    url: '',
   },
   {
     id: 9,
@@ -116,13 +116,13 @@ const specialProducts: ProductData[] = [
     oldPrice: 20000,
     discount: 15,
     bonusText: 'С упоковкой!',
-    url: '/catalog/podarki/kosmetika_dlya_tela/32494/',
+    url: '',
   },
 ];
 
 const FeaturedProducts: React.FC = () => {
   return (
-    <section className="featured-section">
+    <section id="featured-products" className="featured-section">
       <div className="container">
         <h2 className="section-title">РОЗЫ</h2>
         <div className="featured-grid">
@@ -142,7 +142,7 @@ const FeaturedProducts: React.FC = () => {
         </div>
 
         <div className="view-all-container">
-          <Link to="/catalog/bukety-nedeli/" className="view-all-link">
+          <Link to="" className="view-all-link">
             Смотреть все букеты 
           </Link>
         </div>
@@ -165,7 +165,7 @@ const FeaturedProducts: React.FC = () => {
         </div>
 
         <div className="view-all-container">
-          <Link to="/catalog/podarki/kosmetika_dlya_tela/" className="view-all-link">
+          <Link to="" className="view-all-link">
             Смотреть все специальные предложения
           </Link>
         </div>

@@ -1,20 +1,20 @@
+// src/components/layout/Layout.tsx
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
+const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const location = useLocation();
+  // Oculta el Footer en /cart y /favorites
+  const hideFooter = location.pathname === '/cart' || location.pathname === '/favorites';
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="layout">
+    <>
       <Header />
-      <main className="main">
-        {children}
-      </main>
-      <Footer />
-    </div>
+      {children}
+      {!hideFooter && <Footer />}
+    </>
   );
 };
 

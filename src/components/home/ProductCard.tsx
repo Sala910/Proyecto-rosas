@@ -1,11 +1,13 @@
-// src/components/product/ProductCard.tsx
+// src/components/home/ProductCard.tsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './ProductCard.css';
 import heartIcon from '../../assets/images/heart-icon.svg';
+import filledHeartIcon from '../../assets/images/filled-heart-icon.svg';
 import addToCartIcon from '../../assets/images/add-to-cart-icon.svg';
-// Se importa el hook del carrito para actualizar el total global si fuera necesario
+
 import { useCart } from '../../context/CartContext';
+import { useFavorites } from '../../context/FavoritesContext';
 
 interface ProductCardProps {
   id: number;
@@ -28,31 +30,36 @@ const ProductCard: React.FC<ProductCardProps> = ({
   bonusText,
   url,
 }) => {
-  const { addToCart, removeFromCart } = useCart();
-  // Estado local para la cantidad específica de este producto
+  const { addItemToCart } = useCart();
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
   const [quantity, setQuantity] = useState(0);
 
-  // Función para pasar de "no agregado" a haberlo agregado (cantidad 1)
   const handleAddInitial = () => {
     setQuantity(1);
-    addToCart();
+    addItemToCart({ id, title, image, url, price, quantity: 1 });
   };
 
-  // Incrementar cantidad
   const handleIncrement = () => {
     setQuantity(quantity + 1);
-    addToCart();
+    // Cada incremento suma 1 unidad; el contexto suma si ya existe
+    addItemToCart({ id, title, image, url, price, quantity: 1 });
   };
 
-  // Decrementar cantidad: si llega a 0 se vuelve al estado original
   const handleDecrement = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
-      removeFromCart();
+      // Aquí podrías llamar a updateItemQuantity si desearas actualizar exactamente
     } else {
-      // Si quantity es 1, al restar se reinicia el contador
       setQuantity(0);
-      removeFromCart();
+    }
+  };
+
+  const toggleFavorite = () => {
+    if (isFavorite(id)) {
+      removeFavorite(id);
+    } else {
+      // Agregamos el precio al favorito
+      addFavorite({ id, title, image, url, price });
     }
   };
 
@@ -88,29 +95,26 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         <div className="product-actions">
-          <button className="product-wishlist-btn">
-            <img src={heartIcon} alt="В избранное" />
+          {/* Botón de Favoritos */}
+          <button className="product-wishlist-btn" onClick={toggleFavorite}>
+            <img
+              src={isFavorite(id) ? filledHeartIcon : heartIcon}
+              alt="Favorito"
+            />
           </button>
 
+          {/* Botón o contador para el carrito */}
           {quantity === 0 ? (
-            // Estado inicial: botón para agregar al carrito
             <button className="product-cart-btn" onClick={handleAddInitial}>
-              <img src={addToCartIcon} alt="Agregar en carrito" />
+              <img src={addToCartIcon} alt="Agregar al carrito" />
             </button>
           ) : (
-            // Si hay cantidad, mostramos el contador con botones para decrementar e incrementar.
             <div className="product-cart-counter">
-              <button 
-                className="product-cart-btn-decrement" 
-                onClick={handleDecrement}
-              >
+              <button className="product-cart-btn-decrement" onClick={handleDecrement}>
                 –
               </button>
               <span className="product-cart-btn-quantity">{quantity}</span>
-              <button 
-                className="product-cart-btn-increment" 
-                onClick={handleIncrement}
-              >
+              <button className="product-cart-btn-increment" onClick={handleIncrement}>
                 +
               </button>
             </div>
