@@ -146,3 +146,63 @@
   width: 20px;
   height: 20px;
 }
+
+.product-cart-btn {
+  flex: 1;
+  height: 40px;
+  background-color: var(--color-primary);
+  transition: background-color 0.3s;
+}
+
+.product-cart-btn:hover {
+  background-color: #7a3232;
+}
+
+/* Nuevo estilo para cuando el producto se ha agregado */
+.product-cart-btn.added {
+  background-color: green;
+}
+
+.product-cart-btn.added:hover {
+  background-color: darkgreen;
+}
+
+.product-cart-counter {
+  display: flex;
+  align-items: center;
+  border: 1px solid #eee;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  height: 40px;
+}
+
+/* Botones para incrementar y decrementar */
+.product-cart-btn-decrement,
+.product-cart-btn-increment {
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 1.2rem;
+}
+
+/* Hover en los botones de incremento/decremento */
+.product-cart-btn-decrement:hover,
+.product-cart-btn-increment:hover {
+  background-color: #7a3232;
+}
+
+/* Mostrar la cantidad en el centro */
+.product-cart-btn-quantity {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+  line-height: 40px;
+  background-color: #fff;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  font-weight: bold;
+}
