@@ -10,29 +10,24 @@ const Footer: React.FC = () => {
           <div className="footer-column">
             <h3 className="footer-title">Каталог</h3>
             <ul className="footer-links">
-              <li><Link to="/catalog/bukety/">Букеты</Link></li>
-              <li><Link to="/catalog/monobukety/">Монобукеты</Link></li>
-              <li><Link to="/catalog/kompozitsii/">Композиции</Link></li>
-              <li><Link to="/catalog/podarki/">Подарки</Link></li>
-              <li><Link to="/catalog/korolevskie_bukety/">Королевские букеты</Link></li>
-              <li><Link to="/catalog/vazy_i_kashpo/">Вазы и кашпо</Link></li>
+              <li><Link to="">Розы</Link></li>
+              <li><Link to="">Букеты</Link></li>
             </ul>
           </div>
 
           <div className="footer-column">
             <h3 className="footer-title">Покупателям</h3>
             <ul className="footer-links">
-              <li><Link to="/information_for_customers/delivery/">Доставка</Link></li>
-              <li><Link to="/information_for_customers/payment/">Оплата</Link></li>
-              <li><Link to="/information_for_customers/bonusnaya-programma/">Бонусная программа</Link></li>
+              <li><Link to="">Доставка</Link></li>
+              <li><Link to="">Личный кабинет</Link></li>
             </ul>
           </div>
 
           <div className="footer-column">
             <h3 className="footer-title">Информация</h3>
             <ul className="footer-links">
-              <li><Link to="/about/company/">О компании</Link></li>
-              <li><Link to="/about/otzyvy/">Отзывы</Link></li>
+              <li><Link to="">О компании</Link></li>
+              <li><Link to="">Отзывы</Link></li>
             </ul>
           </div>
 

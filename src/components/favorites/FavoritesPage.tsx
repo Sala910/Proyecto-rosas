@@ -9,7 +9,6 @@ const FavoritesPage: React.FC = () => {
   const { favorites, removeFavorite } = useFavorites();
   const { cartItems, addItemToCart, updateItemQuantity, removeItemFromCart } = useCart();
 
-  // Función para obtener la cantidad en el carrito para un producto favorito
   const getCartItemQuantity = (favoriteId: number) => {
     const cartItem = cartItems.find(item => item.id === favoriteId);
     return cartItem ? cartItem.quantity : 0;
@@ -66,7 +65,6 @@ const FavoritesPage: React.FC = () => {
                       </span>
                     </div>
                   )}
-                  {/* Botón para eliminar el favorito */}
                   <button onClick={() => removeFavorite(item.id)} className="remove-favorite-btn">
                     Удалить
                   </button>

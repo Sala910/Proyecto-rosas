@@ -1,7 +1,7 @@
 // src/components/cart/CartPage.tsx
 import React from 'react';
 import { useCart } from '../../context/CartContext';
-import './CartPage.css'; // Puedes crear o ajustar este archivo de estilos
+import './CartPage.css'; 
 
 const CartPage: React.FC = () => {
   const { cartItems, updateItemQuantity, removeItemFromCart, clearCart } = useCart();

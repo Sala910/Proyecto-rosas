@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import HomePage from './components/home/HomePage';
 import CartPage from './components/cart/CartPage';
-import FavoritesPage from './components/favorites/FavoritesPage'; // Asegúrate de que la ruta sea correcta
+import FavoritesPage from './components/favorites/FavoritesPage'; 
 import './styles/global.css';
 import { CartProvider } from './context/CartContext';
 import { FavoritesProvider } from './context/FavoritesContext';

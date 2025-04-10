@@ -6,8 +6,7 @@ import Footer from './Footer';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
-  // Oculta el Footer en /cart y /favorites
-  const hideFooter = location.pathname === '/cart' || location.pathname === '/favorites';
+  const hideFooter = location.pathname === '/cart' || location.pathname === '/favorites';// Oculta el Footer en /cart y /favorites
 
   return (
     <>

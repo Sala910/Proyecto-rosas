@@ -6,6 +6,7 @@ import Categories from './Categories';
 import ScrollToTopButton from '../buttons/ScrollToTopButton'; // Importa desde la carpeta buttons
 import './HomePage.css';
 import Banner from './Banner';
+import Footer from '../layout/Footer';
 
 const HomePage: React.FC = () => {
   const location = useLocation();

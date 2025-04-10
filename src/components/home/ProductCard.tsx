@@ -41,14 +41,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   const handleIncrement = () => {
     setQuantity(quantity + 1);
-    // Cada incremento suma 1 unidad; el contexto suma si ya existe
     addItemToCart({ id, title, image, url, price, quantity: 1 });
   };
 
   const handleDecrement = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
-      // Aquí podrías llamar a updateItemQuantity si desearas actualizar exactamente
     } else {
       setQuantity(0);
     }
@@ -58,7 +56,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
     if (isFavorite(id)) {
       removeFavorite(id);
     } else {
-      // Agregamos el precio al favorito
       addFavorite({ id, title, image, url, price });
     }
   };
@@ -95,7 +92,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         <div className="product-actions">
-          {/* Botón de Favoritos */}
           <button className="product-wishlist-btn" onClick={toggleFavorite}>
             <img
               src={isFavorite(id) ? filledHeartIcon : heartIcon}
@@ -103,7 +99,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
             />
           </button>
 
-          {/* Botón o contador para el carrito */}
           {quantity === 0 ? (
             <button className="product-cart-btn" onClick={handleAddInitial}>
               <img src={addToCartIcon} alt="Agregar al carrito" />

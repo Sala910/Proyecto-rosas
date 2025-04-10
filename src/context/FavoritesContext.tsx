@@ -1,13 +1,12 @@
 // src/context/FavoritesContext.tsx
 import React, { createContext, useContext, useState } from 'react';
 
-// Agrega el campo price a la interfaz
 export interface FavoriteItem {
   id: number;
   title: string;
   image: string;
   url: string;
-  price: number;  // Ahora se incluye el precio
+  price: number;  
 }
 
 interface FavoritesContextType {
