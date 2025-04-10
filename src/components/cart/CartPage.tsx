@@ -41,7 +41,7 @@ const CartPage: React.FC = () => {
                   <span>{item.quantity}</span>
                   <button onClick={() => handleIncrement(item.id, item.quantity)}>+</button>
                   <button onClick={() => removeItemFromCart(item.id)} className="delete-btn">
-                    Eliminar
+                    Удалить
                   </button>
                 </div>
               </li>

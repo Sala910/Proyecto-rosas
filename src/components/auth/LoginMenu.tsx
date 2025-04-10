@@ -21,7 +21,7 @@ const LoginMenu: React.FC<LoginMenuProps> = ({ onLoginSuccess }) => {
   const [regPassword, setRegPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
 
-  /* ------------------ Funciones de Вход ------------------ */
+
   const handleSendCode = () => {
     if (!phone) {
       setError('Введите номер телефона.');

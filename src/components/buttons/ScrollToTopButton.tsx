@@ -8,7 +8,7 @@ const ScrollToTopButton: React.FC = () => {
   };
 
   return (
-    <button className="scroll-to-top" onClick={handleClick} aria-label="Volver al tope">
+    <button className="scroll-to-top" onClick={handleClick} aria-label="Вернуться вверх">
       ↑
     </button>
   );
