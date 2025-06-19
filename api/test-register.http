@@ -1,0 +1,9 @@
+### 👉 Test register.php
+POST http://localhost/Proyecto-rosas/api/register.php
+Content-Type: application/json
+
+{
+  "email":   "u@u.com",
+  "password":"secreto",
+  "nombre":  "Usuario Prueba"
+}

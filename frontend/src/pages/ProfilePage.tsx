@@ -29,7 +29,7 @@ const ProfilePage: React.FC = () => {
       if (!user) return;
       
       try {
-        const userOrders = await getUserOrders(user.id);
+        const userOrders = await getUserOrders(user.id.toString());
         setOrders(userOrders);
       } catch (error) {
         console.error('Error loading orders:', error);
