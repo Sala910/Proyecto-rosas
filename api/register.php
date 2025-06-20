@@ -1,25 +1,29 @@
 <?php
 declare(strict_types=1);
+// ——————————————————————————————————————————
+// ¡Nada de espacios, BOM o texto antes de este <?php!
+// ——————————————————————————————————————————
 
-// 1) Forzamos cookie de sesión y arrancamos sesión
+ini_set('display_errors', '0');
+error_reporting(E_ALL);
+
+// Sesión
 session_set_cookie_params([
     'lifetime' => 0,
     'path'     => '/',
     'domain'   => '',
     'secure'   => false,
     'httponly' => true,
-    'samesite' => 'None'
+    'samesite' => 'Lax'
 ]);
 session_start();
 
-// 2) Salida JSON
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=utf-8');
 
-// 3) Depuración del raw input
+// RAW input para debug
 $raw = file_get_contents('php://input');
 error_log(">>> register.php RAW INPUT: [$raw]");
 
-// 4) Decodificar JSON
 $data = json_decode($raw, true);
 if (!is_array($data)) {
     http_response_code(400);
@@ -31,10 +35,10 @@ if (!is_array($data)) {
     exit;
 }
 
-// 5) Validar campos obligatorios
 $email  = trim($data['email']    ?? '');
 $pass   = trim($data['password'] ?? '');
 $nombre = trim($data['nombre']   ?? '');
+
 if ($email === '' || $pass === '' || $nombre === '') {
     echo json_encode([
       'success' => false,
@@ -43,7 +47,6 @@ if ($email === '' || $pass === '' || $nombre === '') {
     exit;
 }
 
-// 6) Conectar a la base de datos
 require __DIR__ . '/database.php';
 $pdo = connectDB();
 if (!$pdo) {
@@ -54,47 +57,38 @@ if (!$pdo) {
     exit;
 }
 
-// 7) Comprobar email duplicado
 try {
-    $chk = $pdo->prepare('SELECT COUNT(*) FROM usuarios WHERE email = :e');
+    // Verificar duplicado
+    $chk = $pdo->prepare('SELECT 1 FROM usuarios WHERE email = :e');
     $chk->bindParam(':e', $email);
     $chk->execute();
-    if ((int)$chk->fetchColumn() > 0) {
+    if ($chk->fetch()) {
         echo json_encode([
           'success' => false,
           'error'   => 'Email ya registrado'
         ]);
         exit;
     }
-} catch (Exception $e) {
-    error_log("register.php DUPLICADO EXCEP: " . $e->getMessage());
-    echo json_encode([
-      'success' => false,
-      'error'   => 'Error al verificar email duplicado'
-    ]);
-    exit;
-}
 
-// 8) Insertar nuevo usuario (¡ojo al orden!)
-$hash = password_hash($pass, PASSWORD_BCRYPT);
-try {
+    // Hash y INSERT usando el mismo orden de columnas de tu tabla
+    $hash = password_hash($pass, PASSWORD_BCRYPT);
     $ins = $pdo->prepare(
-      'INSERT INTO usuarios (email, nombre, password_hash)
-       VALUES (:email, :nombre, :hash)'
+      'INSERT INTO usuarios (email, password_hash, nombre)
+       VALUES (:email, :hash, :nombre)'
     );
     $ins->bindParam(':email',  $email);
-    $ins->bindParam(':nombre', $nombre);
     $ins->bindParam(':hash',   $hash);
+    $ins->bindParam(':nombre', $nombre);
     $ins->execute();
 
-    // 9) Creamos la sesión y devolvemos éxito + datos
     session_regenerate_id(true);
-    $_SESSION['user_id'] = (int)$pdo->lastInsertId();
+    $uid = (int)$pdo->lastInsertId();
+    $_SESSION['user_id'] = $uid;
 
     echo json_encode([
       'success' => true,
       'user'    => [
-        'id'    => $_SESSION['user_id'],
+        'id'    => $uid,
         'email' => $email,
         'name'  => $nombre
       ]
@@ -102,10 +96,11 @@ try {
     exit;
 
 } catch (Exception $e) {
-    error_log("register.php INSERT EXCEP: " . $e->getMessage());
+    error_log("register.php EXCEP: " . $e->getMessage());
     echo json_encode([
       'success' => false,
-      'error'   => 'Error al insertar usuario'
+      'error'   => 'Error al insertar usuario',
+      'detail'  => $e->getMessage()  // <-- detalle de la excepción
     ]);
     exit;
 }

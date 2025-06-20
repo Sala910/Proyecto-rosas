@@ -1,89 +1,87 @@
+export interface OrderItem {
+  productId: string;
+  productName: string;
+  quantity: number;
+  price: number;
+}
 
-  export interface Order {
-    id: string;
-    userId: string;
-    items: Array<{
-      productId: string;
-      productName: string;
-      quantity: number;
-      price: number;
-    }>;
-    totalAmount: number;
-    status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+export interface Order {
+  id: string;
+  userId: string;
+  items: OrderItem[];
+  totalAmount: number;
+  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  shippingAddress: {
+    name: string;
+    address: string;
+    city: string;
+    phone: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Obtener pedidos
+export async function getUserOrders(): Promise<Order[]> {
+  const resp = await fetch('/api/orders.php', {
+    credentials: 'include',
+    headers: { Accept: 'application/json' },
+  });
+  if (!resp.ok) throw new Error(`Error fetching orders (${resp.status})`);
+  const data = await resp.json();
+  return data.orders.map((o: any) => ({
+    id:          String(o.id),
+    userId:      String(o.usuario_id),
+    items:       JSON.parse(o.detalles) as OrderItem[],
+    totalAmount: Number(o.total),
+    status:      'pending',
     shippingAddress: {
-      name: string;
-      address: string;
-      city: string;
-      phone: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  }
-
-  // Моковые данные заказов
-  const mockOrders: Order[] = [
-    {
-      id: 'order-1',
-      userId: '1',
-      items: [
-        {
-          productId: '1',
-          productName: 'Букет "Весенняя романтика"',
-          quantity: 1,
-          price: 2500
-        }
-      ],
-      totalAmount: 2500,
-      status: 'delivered',
-      shippingAddress: {
-        name: 'Анна Иванова',
-        address: 'ул. Пушкина, д. 15, кв. 42',
-        city: 'Москва',
-        phone: '+7 (999) 123-45-67'
-      },
-      createdAt: '2024-06-10T10:30:00Z',
-      updatedAt: '2024-06-12T14:20:00Z'
+      name:    o.shipping_name   || '',
+      address: o.shipping_address|| '',
+      city:    o.shipping_city   || '',
+      phone:   o.shipping_phone  || '',
     },
-    {
-      id: 'order-2',
-      userId: '1',
-      items: [
-        {
-          productId: '2',
-          productName: 'Композиция "Солнечное утро"',
-          quantity: 2,
-          price: 1800
-        }
-      ],
-      totalAmount: 3600,
-      status: 'shipped',
-      shippingAddress: {
-        name: 'Анна Иванова',
-        address: 'ул. Пушкина, д. 15, кв. 42',
-        city: 'Москва',
-        phone: '+7 (999) 123-45-67'
-      },
-      createdAt: '2024-06-14T15:45:00Z',
-      updatedAt: '2024-06-15T09:15:00Z'
-    }
-  ];
+    createdAt:   o.creado_en,
+    updatedAt:   o.creado_en,
+  }));
+}
 
+// Crear pedido
+export async function createOrder(
+  items: OrderItem[],
+  total: number,
+  shipping: Order['shippingAddress']
+): Promise<boolean> {
+  const resp = await fetch('/api/orders.php', {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type':'application/json',
+      Accept:'application/json'
+    },
+    body: JSON.stringify({
+      detalles: JSON.stringify(items),
+      total,
+      shipping
+    }),
+  });
+  if (!resp.ok) return false;
+  const data = await resp.json();
+  return data.success === true;
+}
 
-  export const getUserOrders = async (userId: string): Promise<Order[]> => {
-    await new Promise(resolve => setTimeout(resolve, 600));
-    return mockOrders.filter(order => order.userId === userId);
-  };
-
-  export const createOrder = async (orderData: Omit<Order, 'id' | 'createdAt' | 'updatedAt'>): Promise<Order> => {
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
-    const newOrder: Order = {
-      ...orderData,
-      id: 'order-' + Date.now(),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    };
-    
-    mockOrders.push(newOrder);
-    return newOrder;
-  };
+// Borrar pedido
+export async function deleteOrder(id: string): Promise<boolean> {
+  const resp = await fetch('/api/orders.php', {
+    method: 'DELETE',
+    credentials:'include',
+    headers:{
+      'Content-Type':'application/json',
+      Accept:'application/json'
+    },
+    body: JSON.stringify({ id: Number(id) })
+  });
+  if (!resp.ok) return false;
+  const data = await resp.json();
+  return data.success === true;
+}

@@ -6,6 +6,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'sonner';
 
+
 const CheckoutPage: React.FC = () => {
   const { items, getTotalPrice, placeOrder, clearCart } = useCart();
   const { user } = useAuth();
@@ -56,6 +57,7 @@ const CheckoutPage: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: v }));
   };
 
+  
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 

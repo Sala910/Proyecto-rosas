@@ -1,0 +1,47 @@
+[20-Jun-2025 02:47:18 Europe/Berlin] PHP Warning:  Undefined array key "shipping" in C:\xampp\htdocs\Proyecto-rosas\api\orders.php on line 53
+[20-Jun-2025 02:47:18 Europe/Berlin] orders.php INSERT ERROR: SQLSTATE[HY000]: General error: 1 table pedidos has no column named shipping
+
+SQL: INSERT INTO pedidos
+  (usuario_id, detalles, total, shipping, status, creado_en)
+VALUES
+  (:uid, :det, :tot, :ship, 'pending', datetime('now'))
+INPUT: {"detalles":"[{\"id\":\"1\",\"name\":\"Букет \\\"Эквадорские розы классик\\\"\",\"price\":2500,\"image\":\"https://content2.flowwow-images.com/data/flowers/1000x1000/63/1635066051_86460463.jpg\",\"quantity\":1}]","total":2500}
+[20-Jun-2025 02:48:26 Europe/Berlin] orders.php INSERT ERROR: SQLSTATE[HY000]: General error: 1 table pedidos has no column named status
+SQL:   INSERT INTO pedidos
+    (usuario_id, detalles, total, status, creado_en)
+  VALUES
+    (:uid, :det, :tot, 'pending', datetime('now'))
+INPUT: {"detalles":"[{\"id\":\"1\",\"name\":\"Букет \\\"Эквадорские розы классик\\\"\",\"price\":2500,\"image\":\"https://content2.flowwow-images.com/data/flowers/1000x1000/63/1635066051_86460463.jpg\",\"quantity\":1}]","total":2500}
+[20-Jun-2025 02:49:00 Europe/Berlin] orders.php INSERT ERROR: SQLSTATE[HY000]: General error: 1 table pedidos has no column named status
+SQL:   INSERT INTO pedidos
+    (usuario_id, detalles, total, status, creado_en)
+  VALUES
+    (:uid, :det, :tot, 'pending', datetime('now'))
+INPUT: {"detalles":"[{\"id\":\"1\",\"name\":\"Букет \\\"Эквадорские розы классик\\\"\",\"price\":2500,\"image\":\"https://content2.flowwow-images.com/data/flowers/1000x1000/63/1635066051_86460463.jpg\",\"quantity\":1}]","total":2500}
+[20-Jun-2025 02:49:02 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 no such column: status
+[20-Jun-2025 02:50:38 Europe/Berlin] orders.php INSERT ERROR: SQLSTATE[HY000]: General error: 1 table pedidos has no column named status
+SQL:   INSERT INTO pedidos
+    (usuario_id, detalles, total, status, creado_en)
+  VALUES
+    (:uid, :det, :tot, 'pending', datetime('now'))
+INPUT: {"detalles":"[{\"id\":\"1\",\"name\":\"Букет \\\"Эквадорские розы классик\\\"\",\"price\":2500,\"image\":\"https://content2.flowwow-images.com/data/flowers/1000x1000/63/1635066051_86460463.jpg\",\"quantity\":1}]","total":2500}
+[20-Jun-2025 02:51:05 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 no such column: status
+[20-Jun-2025 02:54:15 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 no such column: actualizado_en
+[20-Jun-2025 02:58:45 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 no such column: actualizado_en
+[20-Jun-2025 02:58:47 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 no such column: actualizado_en
+[20-Jun-2025 02:59:13 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 no such column: actualizado_en
+[20-Jun-2025 02:59:20 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 no such column: actualizado_en
+[20-Jun-2025 03:00:08 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 no such column: actualizado_en
+[20-Jun-2025 03:08:40 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 no such column: actualizado_en
+[20-Jun-2025 03:08:41 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 no such column: actualizado_en
+[20-Jun-2025 03:09:00 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 no such column: actualizado_en
+[20-Jun-2025 03:09:13 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 no such column: actualizado_en
+[20-Jun-2025 03:11:34 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 near "FROM": syntax error
+[20-Jun-2025 03:12:03 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 near "FROM": syntax error
+[20-Jun-2025 03:12:07 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 near "FROM": syntax error
+[20-Jun-2025 03:12:23 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 near "FROM": syntax error
+[20-Jun-2025 03:48:02 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 no such column: shipping_name
+[20-Jun-2025 03:54:03 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 no such column: shipping_name
+[20-Jun-2025 03:54:19 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 no such column: shipping_name
+[20-Jun-2025 03:57:38 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 no such column: shipping_name
+[20-Jun-2025 04:00:32 Europe/Berlin] orders.php SELECT ERROR: SQLSTATE[HY000]: General error: 1 no such column: shipping_name
